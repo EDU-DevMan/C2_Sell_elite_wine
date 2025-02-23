@@ -1,4 +1,5 @@
 import datetime
+import pandas
 
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from jinja2 import Environment, FileSystemLoader, select_autoescape
@@ -9,6 +10,7 @@ NUMBERS_EXCLUSION = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
 EXCLUSION_ZERO = 0
 EXCLUSION_ONE = 1
 EXCLUSION_FOUR = 4
+WINE_LIST = 'wine.xlsx'
 
 
 def data_foudation(FOUNDATION):
@@ -28,6 +30,13 @@ def declination_dates(date):
         return "год"
     else:
         return "года"
+
+
+def parsing_wine_list(xlsx):
+    excel_data_df = pandas.read_excel(xlsx,
+                                      sheet_name='Лист1',
+                                      usecols=None)
+    return excel_data_df.to_json(orient='records', force_ascii=False)
 
 
 env = Environment(
