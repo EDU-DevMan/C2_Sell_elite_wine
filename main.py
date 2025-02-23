@@ -10,7 +10,7 @@ NUMBERS_EXCLUSION = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
 EXCLUSION_ZERO = 0
 EXCLUSION_ONE = 1
 EXCLUSION_FOUR = 4
-WINE_LIST = 'wine.xlsx'
+WINE_DATASET = "wine.xlsx"
 
 
 def data_foudation(FOUNDATION):
@@ -33,10 +33,9 @@ def declination_dates(date):
 
 
 def parsing_wine_list(xlsx):
-    excel_data_df = pandas.read_excel(xlsx,
-                                      sheet_name='Лист1',
-                                      usecols=None)
-    return excel_data_df.to_json(orient='records', force_ascii=False)
+    data = pandas.read_excel(xlsx)
+
+    return data.to_dict(orient='records')
 
 
 env = Environment(
@@ -49,6 +48,7 @@ template = env.get_template('template.html')
 rendered_page = template.render(
     our_age=data_foudation(FOUNDATION),
     declin_dates=declination_dates(data_foudation(FOUNDATION)),
+    wine_list=parsing_wine_list(WINE_DATASET),
 )
 
 with open('index.html', 'w', encoding="utf8") as file:
