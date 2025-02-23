@@ -4,7 +4,11 @@ from http.server import HTTPServer, SimpleHTTPRequestHandler
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 
-FOUNDATION = 1904
+FOUNDATION = 1920
+NUMBERS_EXCLUSION = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+EXCLUSION_ZERO = 0
+EXCLUSION_ONE = 1
+EXCLUSION_FOUR = 4
 
 
 def data_foudation(FOUNDATION):
@@ -15,11 +19,12 @@ def data_foudation(FOUNDATION):
 def declination_dates(date):
     slice_one = int(date[-1:])
     slice_two = int(date[-2:])
-    numbers_exclusion = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
 
-    if slice_one == 0 or slice_one > 4 or slice_two in numbers_exclusion:
+    if (slice_one == EXCLUSION_ZERO or
+            slice_one > EXCLUSION_FOUR or
+            slice_two in NUMBERS_EXCLUSION):
         return "лет"
-    elif slice_one == 1:
+    elif slice_one == EXCLUSION_ONE:
         return "год"
     else:
         return "года"
