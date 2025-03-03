@@ -3,6 +3,7 @@ import pandas
 
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from jinja2 import Environment, FileSystemLoader, select_autoescape
+from collections import defaultdict
 
 
 FOUNDATION = 1920
@@ -10,7 +11,7 @@ NUMBERS_EXCLUSION = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
 EXCLUSION_ZERO = 0
 EXCLUSION_ONE = 1
 EXCLUSION_FOUR = 4
-WINE_DATASET = "wine.xlsx"
+WINE_DATASET = "wine2.xlsx"
 
 
 def data_foudation(FOUNDATION):
@@ -33,9 +34,16 @@ def declination_dates(date):
 
 
 def parsing_wine_list(xlsx):
-    data = pandas.read_excel(xlsx)
+    excel_data_df = pandas.read_excel(xlsx,
+                                      na_values=['N/A', 'NA'],
+                                      keep_default_na=False)
+    data = excel_data_df.to_dict(orient='records')
 
-    return data.to_dict(orient='records')
+    dict_of_lists = defaultdict(list)
+    for x in sorted(data, key=lambda x: x['Категория']):
+        dict_of_lists[x['Категория']].append(x)
+
+    return dict_of_lists
 
 
 env = Environment(
