@@ -14,12 +14,12 @@ EXCLUSION_FOUR = 4
 WINE_DATASET = "wine3.xlsx"
 
 
-def date_calculation(FOUNDATION):
+def calculation_date(FOUNDATION):
     our_age = datetime.datetime.now().year - FOUNDATION
     return str(our_age)
 
 
-def dates_declension(date):
+def declension_dates(date):
     slice_one = int(date[-1:])
     slice_two = int(date[-2:])
 
@@ -55,8 +55,8 @@ def main():
     template = env.get_template('template.html')
 
     rendered_page = template.render(
-        our_age=date_calculation(FOUNDATION),
-        declin_dates=dates_declension(date_calculation(FOUNDATION)),
+        our_age=calculation_date(FOUNDATION),
+        declin_dates=declension_dates(calculation_date(FOUNDATION)),
         wine_list=parsing_wine_list(WINE_DATASET),
     )
 
