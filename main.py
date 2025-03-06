@@ -63,9 +63,10 @@ def main():
 
     template = env.get_template('template.html')
 
+    found_date = calculation_date(FOUNDATION)
     rendered_page = template.render(
-        our_age=calculation_date(FOUNDATION),
-        declin_dates=declension_dates(calculation_date(FOUNDATION)),
+        our_age=found_date,
+        declin_dates=declension_dates(found_date),
         wines_file=reading_wine_file(args.your_path),
     )
 
