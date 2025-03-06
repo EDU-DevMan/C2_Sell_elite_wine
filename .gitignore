@@ -1,4 +1,6 @@
-env/
+# Environments
+.env/
+
 .vscode/
 
 .replit
