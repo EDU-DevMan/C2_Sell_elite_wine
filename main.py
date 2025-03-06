@@ -49,7 +49,6 @@ def reading_wine_file(xlsx):
 
 
 def main():
-
     parser = argparse.ArgumentParser(description='Demo-сайт Винный Магазин')
     parser.add_argument('--your_path',
                         default=config('FILE_PATH'),
