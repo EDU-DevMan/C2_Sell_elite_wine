@@ -5,13 +5,14 @@ from http.server import HTTPServer, SimpleHTTPRequestHandler
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from collections import defaultdict
 
+from decouple import config
+
 
 FOUNDATION = 1920
 NUMBERS_EXCLUSION = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
 EXCLUSION_ZERO = 0
 EXCLUSION_ONE = 1
 EXCLUSION_FOUR = 4
-WINE_DATASET = "wine3.xlsx"
 
 
 def calculation_date(FOUNDATION):
@@ -57,7 +58,7 @@ def main():
     rendered_page = template.render(
         our_age=calculation_date(FOUNDATION),
         declin_dates=declension_dates(calculation_date(FOUNDATION)),
-        wine_list=parsing_wine_list(WINE_DATASET),
+        wine_list=parsing_wine_list(config('FILE_PATH')),
     )
 
     with open('index.html', 'w', encoding="utf8") as file:
