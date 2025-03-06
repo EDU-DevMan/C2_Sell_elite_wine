@@ -1,5 +1,6 @@
 import datetime
 import pandas
+import argparse
 
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from jinja2 import Environment, FileSystemLoader, select_autoescape
@@ -48,6 +49,13 @@ def parsing_wine_list(xlsx):
 
 
 def main():
+
+    parser = argparse.ArgumentParser(description='Demo-сайт Винный Магазин')
+    parser.add_argument('--your_path',
+                        default=config('FILE_PATH'),
+                        help='Формат ввода --your_path my_path/MY_FILE.xlsx')
+    args = parser.parse_args()
+
     env = Environment(
         loader=FileSystemLoader('.'),
         autoescape=select_autoescape(['html', 'xml'])
@@ -58,7 +66,7 @@ def main():
     rendered_page = template.render(
         our_age=calculation_date(FOUNDATION),
         declin_dates=declension_dates(calculation_date(FOUNDATION)),
-        wine_list=parsing_wine_list(config('FILE_PATH')),
+        wine_list=parsing_wine_list(args.your_path),
     )
 
     with open('index.html', 'w', encoding="utf8") as file:
