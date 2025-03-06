@@ -35,17 +35,17 @@ def declension_dates(date):
         return "года"
 
 
-def parsing_wine_list(xlsx):
+def reading_wine_file(xlsx):
     excel_data_df = pandas.read_excel(xlsx,
                                       na_values=['N/A', 'NA'],
                                       keep_default_na=False)
     data = excel_data_df.to_dict(orient='records')
 
-    dict_of_lists = defaultdict(list)
+    categories_wines = defaultdict(list)
     for x in sorted(data, key=lambda x: x['Категория']):
-        dict_of_lists[x['Категория']].append(x)
+        categories_wines[x['Категория']].append(x)
 
-    return dict_of_lists
+    return categories_wines
 
 
 def main():
@@ -66,7 +66,7 @@ def main():
     rendered_page = template.render(
         our_age=calculation_date(FOUNDATION),
         declin_dates=declension_dates(calculation_date(FOUNDATION)),
-        wine_list=parsing_wine_list(args.your_path),
+        wines_file=reading_wine_file(args.your_path),
     )
 
     with open('index.html', 'w', encoding="utf8") as file:
