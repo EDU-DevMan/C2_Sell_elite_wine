@@ -30,6 +30,12 @@
 
 [`Пример для Unix/macOS`](https://pip.pypa.io/en/stable/user_guide/#requirements-files)
 
+- Дополнительно потребуется установить `python-decouple` командой:
+
+```pip install python-decouple```
+
+Подробное описание библиотеки и ее установка [тут](https://pypi.org/project/python-decouple/)
+
 - В корне проекта создайте файл `.env`, и заведите переменную `FILE_PATH=`, 
 в этой переменной будет храниться путь к файлу (.xlsx) с набором данных о вине `FILE_PATH='wine.xlsx'`
 
