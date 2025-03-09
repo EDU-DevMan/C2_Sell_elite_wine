@@ -16,12 +16,12 @@ EXCLUSION_ONE = 1
 EXCLUSION_FOUR = 4
 
 
-def calculation_date(FOUNDATION):
+def get_founding_date(FOUNDATION):
     our_age = datetime.datetime.now().year - FOUNDATION
     return str(our_age)
 
 
-def declension_dates(date):
+def get_correct_declension(date):
     slice_one = int(date[-1:])
     slice_two = int(date[-2:])
 
@@ -35,7 +35,7 @@ def declension_dates(date):
         return "года"
 
 
-def reading_wine_file(xlsx):
+def read_file(xlsx):
     excel_data_df = pandas.read_excel(xlsx,
                                       na_values=['N/A', 'NA'],
                                       keep_default_na=False)
@@ -62,11 +62,11 @@ def main():
 
     template = env.get_template('template.html')
 
-    found_date = calculation_date(FOUNDATION)
+    found_date = get_founding_date(FOUNDATION)
     rendered_page = template.render(
         our_age=found_date,
-        declin_dates=declension_dates(found_date),
-        wines_file=reading_wine_file(args.your_path),
+        declin_dates=get_correct_declension(found_date),
+        wines_file=read_file(args.your_path),
     )
 
     with open('index.html', 'w', encoding="utf8") as file:
