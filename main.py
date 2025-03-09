@@ -17,8 +17,8 @@ EXCLUSION_FOUR = 4
 
 
 def get_founding_date(FOUNDATION):
-    our_age = datetime.datetime.now().year - FOUNDATION
-    return str(our_age)
+    founding_date = datetime.datetime.now().year - FOUNDATION
+    return str(founding_date)
 
 
 def get_correct_declension(date):
@@ -41,11 +41,11 @@ def read_file(xlsx):
                                       keep_default_na=False)
     data = excel_data_df.to_dict(orient='records')
 
-    categories_wines = defaultdict(list)
+    categories_wine = defaultdict(list)
     for x in sorted(data, key=lambda x: x['Категория']):
-        categories_wines[x['Категория']].append(x)
+        categories_wine[x['Категория']].append(x)
 
-    return categories_wines
+    return categories_wine
 
 
 def main():
