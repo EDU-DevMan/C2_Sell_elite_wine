@@ -20,6 +20,18 @@
 
 ```..\venv_wine\Scripts\activate.bat```
 
+- Важно, если используется VS Code, активацию виртального окружения можно провести следующим образом:
+
+Нажать `ctrl+shift+p`, из списка Выбрать:
+
+ `Python Selected Interpreter > Create Virtusl Enviroment > venv >`
+ 
+ `> Find C:\DevMan\Course_2\Layout\venv_wine\Scripts\python.exe`
+
+Обязательно перезапустить терминал 
+
+`Terminal > New Terminal`
+
 [`Пример для Unix/macOS`](https://dvmn.org/encyclopedia/pip/pip_virtualenv/)
 
 - Установите зависимости
@@ -29,12 +41,6 @@
 ```py -m pip install -r requirements.txt```
 
 [`Пример для Unix/macOS`](https://pip.pypa.io/en/stable/user_guide/#requirements-files)
-
-- Дополнительно потребуется установить `python-decouple` командой:
-
-```pip install python-decouple```
-
-Подробное описание библиотеки и ее установка [тут](https://pypi.org/project/python-decouple/)
 
 - В корне проекта создайте файл `.env`, и заведите переменную `FILE_PATH=`, 
 в этой переменной будет храниться путь к файлу (.xlsx) с набором данных о вине `FILE_PATH='wine.xlsx'`
