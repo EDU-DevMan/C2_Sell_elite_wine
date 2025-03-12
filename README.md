@@ -32,7 +32,7 @@
 
 `Terminal > New Terminal`
 
-[`Пример для Unix/macOS`](https://dvmn.org/encyclopedia/pip/pip_virtualenv/)
+[`Пример для Windows`](https://dvmn.org/encyclopedia/pip/pip_virtualenv/)
 
 - Установите зависимости
 
